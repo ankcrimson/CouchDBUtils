@@ -11,20 +11,19 @@ import org.lightcouch.View;
  * @author Ankur Srivastava
  *
  */
-public class UpdateKey {
+public class AddKey {
 
   public static void main(String[] args) {
     CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
     conn.context().compact();
-    final String src = "ProductNLomBuild";
+    final String val = "Yes";
     final String tgt = "ProductFromBuild";
     View view = conn.view("reg/StreetAddressOrderByCC");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());
 
-    res.stream().filter(m -> ((Map) m.get("value")).containsKey(src)).map(m -> {
-      ((Map) m.get("value")).put(tgt, ((Map) m.get("value")).get(src));
-      ((Map) m.get("value")).remove(src);
+    res.stream().filter(m -> !((Map) m.get("value")).containsKey(tgt)).map(m -> {
+      ((Map) m.get("value")).put(tgt, val);
       return m;
     }).forEach(m -> {
       conn.update(((Map) m.get("value")));
