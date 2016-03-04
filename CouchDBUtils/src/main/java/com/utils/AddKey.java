@@ -16,8 +16,8 @@ public class AddKey {
   public static void main(String[] args) {
     CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
     conn.context().compact();
-    final String val = "Yes";
-    final String tgt = "ProductFromBuild";
+    String val = "Yes";
+    String tgt = "ProductFromBuild";
     View view = conn.view("reg/StreetAddressOrderByCC");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());

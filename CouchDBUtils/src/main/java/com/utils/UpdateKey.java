@@ -16,8 +16,8 @@ public class UpdateKey {
   public static void main(String[] args) {
     CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
     conn.context().compact();
-    final String src = "ProductNLomBuild";
-    final String tgt = "ProductFromBuild";
+    String src = "ProductNLomBuild";
+    String tgt = "ProductFromBuild";
     View view = conn.view("reg/StreetAddressOrderByCC");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());

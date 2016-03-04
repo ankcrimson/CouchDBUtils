@@ -14,14 +14,15 @@ import org.lightcouch.View;
 
 public class UpdateValues {
   public static void main(String[] args) {
-    CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
+    CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "10.216.138.222", 5984, "admin", "admin");
+    // CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
     conn.context().compact();
 
-    String fieldName = "ExecuteScript";
+    String fieldName = "ProductFromBuild";
     String fromVal = "No";
     String toVal = "Yes";
 
-    View view = conn.view("reg/StreetAddressOrderByCC");
+    View view = conn.view("reg/StreetAddressOrderByExpPayPal");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());
 
