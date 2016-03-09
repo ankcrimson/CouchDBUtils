@@ -18,11 +18,11 @@ public class UpdateValues {
     // CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
     conn.context().compact();
 
-    String fieldName = "ProductFromBuild";
-    String fromVal = "No";
+    String fieldName = "ExecuteScript";
+    String fromVal = "Invalid";
     String toVal = "Yes";
 
-    View view = conn.view("reg/StreetAddressOrderByExpPayPal");
+    View view = conn.view("reg/AllRowsRun");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());
 
