@@ -9,10 +9,15 @@ import org.lightcouch.View;
 
 public class UpdateExecIDs {
 
+
+
   public static void main(String[] args) {
-    CouchDbClient conn = new CouchDbClient("ocp_eddedr_exec", true, "http", "10.195.171.123", 5984, "admin", "admin");
+    String dbName = "ocp_smoke_exec";
+    String viewName = "reg/all_docs_1";
+    String pre = "st_";
+    CouchDbClient conn = new CouchDbClient(dbName, true, "http", "10.216.138.222", 5984, "admin", "admin");
     conn.context().compact();
-    View view = conn.view("edit/all_docs_1");
+    View view = conn.view(viewName);
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());
 
@@ -21,7 +26,7 @@ public class UpdateExecIDs {
       Map m2 = (Map) m.get("value");
       if (m2.containsKey("ScriptName")) {
         int ctr;
-        String key = m2.get("Region") + "_" + m2.get("ScriptName");
+        String key = pre + m2.get("Country") + "_" + m2.get("ScriptName");
         if (scnt.containsKey(key)) {
           ctr = scnt.get(key);
         } else
