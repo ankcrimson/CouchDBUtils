@@ -18,7 +18,7 @@ public class FilterDocs {
   public static void main(String[] args) {
     // CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "10.216.138.222", 5984, "admin", "admin");
     CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
-    conn.context().compact();
+    // conn.context().compact();
 
     String fieldName = "Country";
     Set<String> values = new HashSet<>();

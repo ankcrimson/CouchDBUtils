@@ -12,7 +12,7 @@ import org.lightcouch.View;
  *
  */
 
-public class UpdateValues {
+public class UpdateValuesForGS {
   @SuppressWarnings("rawtypes")
   public static void main(String[] args) {
     String user = "asriv5";
@@ -24,18 +24,19 @@ public class UpdateValues {
     String fieldName = "ProductFromBuild";
     String fromVal = "No";
     String toVal = "Yes";
-
+    String lookupField = "ScriptName";
+    String lookupTermStartsWith = "GS";
     View view = conn.view("reg/all_docs_1");
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());
 
-    res.stream().map(map -> (Map) map.get("value")).filter(m -> m.containsKey(fieldName) && m.get(fieldName).toString().equalsIgnoreCase(fromVal))
-        .forEach(m -> {
+    res.stream().map(map -> (Map) map.get("value")).filter(m -> m.containsKey(fieldName) && m.get(fieldName).toString().equalsIgnoreCase(fromVal)
+        && m.containsKey(lookupField) && m.get(lookupField).toString().startsWith(lookupTermStartsWith)).forEach(m -> {
           // String region = ((Map) m.get("value")).get("Region").toString();
           m.put(fieldName, toVal);
           m.put("lastModifiedBy", user);
           conn.update(m);
-          System.out.println("Updated - " + m.get("_id"));
+          System.out.println("Updated - " + m.get("_id") + " - " + m.get(lookupField));
         });
 
   }

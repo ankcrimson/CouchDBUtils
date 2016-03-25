@@ -16,7 +16,7 @@ public class UpdateExecIDs {
     String viewName = "reg/all_docs_1";
     String pre = "st_";
     CouchDbClient conn = new CouchDbClient(dbName, true, "http", "10.216.138.222", 5984, "admin", "admin");
-    conn.context().compact();
+    // conn.context().compact();
     View view = conn.view(viewName);
     List<Map> res = view.query(Map.class);
     System.out.println(res.size());

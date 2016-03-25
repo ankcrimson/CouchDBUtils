@@ -15,7 +15,7 @@ public class UpdateKey {
 
   public static void main(String[] args) {
     CouchDbClient conn = new CouchDbClient("ocp_runscripts", true, "http", "localhost", 5984, "admin", "admin");
-    conn.context().compact();
+    // conn.context().compact();
     String src = "ErrorRowID";
     String tgt = "ProductFromBuild";
     View view = conn.view("reg/StreetAddressOrderByCC");
@@ -23,7 +23,7 @@ public class UpdateKey {
     System.out.println(res.size());
 
     res.stream().filter(m -> ((Map) m.get("value")).containsKey(src)).map(m -> {
-      //((Map) m.get("value")).put(tgt, ((Map) m.get("value")).get(src));
+      // ((Map) m.get("value")).put(tgt, ((Map) m.get("value")).get(src));
       ((Map) m.get("value")).remove(src);
       return m;
     }).forEach(m -> {
